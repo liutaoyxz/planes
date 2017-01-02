@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.socket.SocketChannel;
 import online.geimu.plane.player.ContainerManager;
 
+import static online.geimu.plane.handler.Operator.NEW_PLAYER;
+
 /**
  * @author liutao
  * @description :
@@ -31,31 +33,6 @@ public class OperatorHandler {
         return instance;
     }
 
-    //请求
-    //加入游戏
-    public static final int REQ_TYPE_NEW_PLAYER = 0;
-    //游戏开始  准备好了
-    public static final int REQ_TYPE_GAME_START = 1;
-    //玩家移动
-    public static final int REQ_TYPE_PLAYER_MOVE = 2;
-    //使用道具 or 产生事件
-    public static final int REQ_TYPE_PLAYER_EVENT = 3;
-    //取消按键
-    public static final int REQ_TYPE_PLAYER_TURN_END = 4;
-    //按下按键
-    public static final int REQ_TYPE_PLAYER_TURN_START = 5;
-    //玩家id
-    public static final int REQ_TYPE_PLAYER_ID = 6;
-    //
-    public static final int REQ_TYPE_ROLL = 7;
-    //游戏结束
-    public static final int REQ_TYPE_STOP = 8;
-    //聊天
-    public static final int REQ_TYPE_CAHT = 10086;
-    //延迟测量 发送
-    public static final int REQ_TYPE_TIME_SEND = 9;
-    //延迟测量 收取
-    public static final int REQ_TYPE_TIME_RECEIVE = 10;
 
 
     public static final String SEND = "send  :";
@@ -74,14 +51,15 @@ public class OperatorHandler {
         String pid = head.getString("id");
         String forward = null;
         int type = head.getInteger("type");
+        Operator op =Operator.getOperator(type);
         ContainerManager cm = ContainerManager.getManager();
         final String id = sc.id().toString();
-        switch (type){
-            case REQ_TYPE_NEW_PLAYER:
+        switch (op){
+            case NEW_PLAYER:
                 //新玩家进入
                 cm.addPlayerAndStart(id,request,sc);
                 break;
-            case REQ_TYPE_GAME_START:
+            case READY_START:
                 //游戏开始  准备好了
                 int mapx = body.getInteger("mapx");
                 int mapy = body.getInteger("mapy");
@@ -90,36 +68,24 @@ public class OperatorHandler {
                 int speed = body.getInteger("speed");
                 cm.ready(sc,mapx,mapy,width,height,speed);
                 break;
-            case REQ_TYPE_PLAYER_MOVE:
-                //玩家移动
-                break;
-            case REQ_TYPE_PLAYER_TURN_END:
+            case MOVE_STOP:
                 //取消按键
                 forward = body.getString("forward");
                 cm.stopMove(pid,forward);
                 break;
-            case REQ_TYPE_PLAYER_TURN_START:
+            case MOVE_START:
                 //按下方向键
                 forward = body.getString("forward");
                 cm.move(pid,forward);
                 break;
-            case REQ_TYPE_PLAYER_ID:
-                //请求玩家id
+            case CAHT:
+                //玩家聊天
                 break;
-            case REQ_TYPE_ROLL:
-                //roll
-                break;
-            case REQ_TYPE_PLAYER_EVENT:
-                //玩家事件
-                break;
-            case REQ_TYPE_CAHT:
-                //玩家事件
-                break;
-            case REQ_TYPE_TIME_SEND:
+            case TIME_SEND:
                 //发送时间戳
 
                 break;
-            case REQ_TYPE_TIME_RECEIVE:
+            case TIME_RECEIVE:
                 //发送延迟
                 break;
             default:

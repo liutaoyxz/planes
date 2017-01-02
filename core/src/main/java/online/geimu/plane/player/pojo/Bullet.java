@@ -7,6 +7,15 @@ import online.geimu.plane.player.pojo.map.Obj;
  * 子弹类
  */
 public class Bullet implements Obj{
+
+    private int x;
+
+    private int y;
+
+    private int speed;
+
+    private int type;
+
     @Override
     public void move() {
 

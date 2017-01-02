@@ -1,6 +1,7 @@
 package online.geimu.plane.player;
 
 import io.netty.channel.socket.SocketChannel;
+import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.Plane;
 import online.geimu.plane.player.pojo.map.TestMap;
@@ -133,7 +134,7 @@ public class ContainerManager {
                 idps.put(cid,pc);
             }
             readyIds.clear();
-            pc.castMsg(OperatorHandler.REQ_TYPE_GAME_START);
+            pc.castMsg(Operator.READY_START.code());
             pc.start();
             pc = new PlayerContainer();
         }

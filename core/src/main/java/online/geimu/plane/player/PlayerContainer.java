@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.*;
 import org.apache.log4j.Logger;
@@ -63,7 +64,7 @@ public class PlayerContainer {
         frame.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                castMsg(OperatorHandler.REQ_TYPE_PLAYER_MOVE);
+                castMsg(Operator.MOVE_START.code());
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
     }
@@ -75,7 +76,7 @@ public class PlayerContainer {
         frame.shutdownNow();
         for (Plane p : plist) {
             p.stopMove();
-            castMsg(OperatorHandler.REQ_TYPE_STOP);
+            castMsg(Operator.GAME_STOP.code());
         }
     }
 
