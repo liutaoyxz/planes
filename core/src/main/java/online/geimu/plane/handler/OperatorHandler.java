@@ -68,16 +68,16 @@ public class OperatorHandler {
                 int speed = body.getInteger("speed");
                 cm.ready(sc,mapx,mapy,width,height,speed);
                 break;
-            case MOVE_STOP:
-                //取消按键
-                forward = body.getString("forward");
-                cm.stopMove(pid,forward);
-                break;
             case MOVE_START:
                 //按下方向键
                 forward = body.getString("forward");
                 cm.move(pid,forward);
                 break;
+            case MOVE_STOP:
+            //取消按键
+            forward = body.getString("forward");
+            cm.stopMove(pid,forward);
+            break;
             case CAHT:
                 //玩家聊天
                 break;
