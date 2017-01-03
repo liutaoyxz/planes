@@ -62,13 +62,13 @@ public class Plane {
             @Override
             public void run() {
                 if (mx > 0){
-                    px = Math.min((px+ width+speed),map.getX());
+                    px = Math.min((px+ width+speed),map.getX())-width;
                 }else if (mx < 0){
                     px = Math.max((px-speed),0);
                 }
 
                 if (my > 0){
-                    py = Math.min((py+ height+speed),map.getY());
+                    py = Math.min((py+ height+speed),map.getY())-height;
                 }else if (my < 0){
                     py = Math.max((py-speed),0);
                 }
