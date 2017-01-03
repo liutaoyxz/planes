@@ -2,9 +2,11 @@ package online.geimu.plane.player.pojo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import io.netty.channel.socket.SocketChannel;
 import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.map.TestMap;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.concurrent.TimeUnit;
  * Created by ltlxy on 2016/12/20.
  */
 public class Plane {
+
+    private static final Logger log = Logger.getLogger(Plane.class);
 
     private int imgIndex;  //图片编号
 
@@ -58,7 +62,9 @@ public class Plane {
      * 飞机自动移动
      */
     public void move(){
+        log.debug(id+  " : 开启自动移动!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (mx > 0){
