@@ -62,7 +62,7 @@ public class Plane {
      * 飞机自动移动
      */
     public void move(){
-        log.debug(id+  " : 开启自动移动!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        log.debug(id+ "speed :"+speed+ " : 开启自动移动!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
             @Override
