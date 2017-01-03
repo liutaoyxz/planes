@@ -74,10 +74,14 @@ public class ContainerManager {
      */
     public void addPlayerAndStart(String id, String request, SocketChannel sc){
         final int imgIndex = lastIndex.getAndAdd(1)%img_num;
+        Plane plane = new Plane();
+        plane.setId(id);
+        plane.setImgIndex(imgIndex);
         Head head = new Head();
         head.setId(id);
         head.setType(Operator.NEW_PLAYER.code());
         ResBody body = new ResBody();
+        body.setPlane(plane);
         WCResponse response = new WCResponse(head,body);
         String str = JSON.toJSONString(response);
         log.debug(OperatorHandler.SEND+str);
