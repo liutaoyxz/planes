@@ -1,9 +1,14 @@
 package online.geimu.plane.player;
 
+import com.alibaba.fastjson.JSON;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
+import online.geimu.plane.player.pojo.Head;
 import online.geimu.plane.player.pojo.Plane;
+import online.geimu.plane.player.pojo.ResBody;
+import online.geimu.plane.player.pojo.WCResponse;
 import online.geimu.plane.player.pojo.map.TestMap;
 import org.apache.log4j.Logger;
 
@@ -64,11 +69,18 @@ public class ContainerManager {
     private final String[] colors = {"blue","pink","red","yellow"};
 
     /**
-     * 添加一个玩家并启动
+     * 刚刚连接上的玩家请求id
      * @param id
      */
     public void addPlayerAndStart(String id, String request, SocketChannel sc){
-
+        Head head = new Head();
+        head.setId(id);
+        head.setType(Operator.NEW_PLAYER.code());
+        ResBody body = new ResBody();
+        WCResponse response = new WCResponse(head,body);
+        String str = JSON.toJSONString(response);
+        log.debug(OperatorHandler.SEND+str);
+        sc.writeAndFlush(new TextWebSocketFrame(str));
     }
 
     /**

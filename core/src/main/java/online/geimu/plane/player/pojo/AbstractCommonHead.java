@@ -9,7 +9,7 @@ public abstract class AbstractCommonHead {
 
     private int type;
 
-    private String playid;
+    private String id;
 
     public int getType() {
         return type;
@@ -19,19 +19,19 @@ public abstract class AbstractCommonHead {
         this.type = type;
     }
 
-    public String getPlayid() {
-        return playid;
+    public String getId() {
+        return id;
     }
 
-    public void setPlayid(String playid) {
-        this.playid = playid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "AbstractCommonHead{" +
                 "type=" + type +
-                ", playid='" + playid + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
 }

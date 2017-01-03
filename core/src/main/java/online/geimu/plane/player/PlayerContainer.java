@@ -92,7 +92,7 @@ public class PlayerContainer {
         ResBody body = new ResBody();
         body.setPlanes(plist);
         for (Plane p : plist) {
-            head.setPlayid(p.getId());
+            head.setId(p.getId());
             String jstr = JSON.toJSONString(response,SerializerFeature.DisableCircularReferenceDetect);
             log.debug(OperatorHandler.SEND+jstr);
             p.getSc().writeAndFlush(new TextWebSocketFrame(jstr));
