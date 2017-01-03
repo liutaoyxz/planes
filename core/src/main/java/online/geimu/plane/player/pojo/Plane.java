@@ -90,10 +90,12 @@ public class Plane {
     }
 
     public void setMx(int x){
+        log.debug("设置x轴移动标识   ==> "+x);
         this.mx = x;
     }
 
     public void setMy(int y){
+        log.debug("设置y轴移动标识   ==> "+y);
         this.my = y;
     }
 
