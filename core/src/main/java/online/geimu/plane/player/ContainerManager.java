@@ -94,7 +94,6 @@ public class ContainerManager {
      * @param forward
      */
     public void move(String id,String forward){
-        log.debug("进入移动方法, 移动的方向是   ==> "+forward);
         PlayerContainer pc = idps.get(id);
         pc.move(id,forward);
     }

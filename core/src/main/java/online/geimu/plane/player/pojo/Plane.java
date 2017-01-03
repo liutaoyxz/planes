@@ -62,14 +62,12 @@ public class Plane {
      * 飞机自动移动
      */
     public void move(){
-        log.debug(id+ "speed :"+speed+ " : 开启自动移动!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         final Plane plane = this;
         scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 final int cx = plane.mx;
                 final int cy = plane.my;
-                log.debug("mx  :  "+cx+"  , my  :  "+cy);
                 if (cx > 0){
                     px = Math.min((px+ width+speed),map.getX())-width;
                 }else if (cx < 0){
@@ -91,11 +89,9 @@ public class Plane {
 
     public void setMx(int x){
         this.mx = x;
-        log.debug("设置x轴移动标识   ==> "+x);
     }
 
     public void setMy(int y){
-        log.debug("设置y轴移动标识   ==> "+y);
         this.my = y;
     }
 

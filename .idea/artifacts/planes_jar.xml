@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact name="planes:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/planes_jar</output-path>
+    <root id="root">
+      <element id="archive" name="planes.jar">
+        <element id="module-output" name="core" />
+        <element id="module-output" name="plane-parent" />
+      </element>
+      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.0" />
+      <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+      <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.21" />
+      <element id="library" level="project" name="Maven: com.beust:jcommander:1.58" />
+      <element id="library" level="project" name="Maven: com.sun.jmx:jmxri:1.2.1" />
+      <element id="library" level="project" name="Maven: com.sun.jdmk:jmxtools:1.2.1" />
+      <element id="library" level="project" name="Maven: log4j:log4j:1.2.15" />
+      <element id="library" level="project" name="Maven: junit:junit:4.12" />
+      <element id="library" level="project" name="Maven: javax.jms:jms:1.1" />
+      <element id="library" level="project" name="Maven: javax.mail:mail:1.4" />
+      <element id="library" level="project" name="Maven: io.netty:netty-all:5.0.0.Alpha2" />
+      <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
+    </root>
+  </artifact>
+</component>
