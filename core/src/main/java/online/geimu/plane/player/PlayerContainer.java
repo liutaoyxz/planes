@@ -88,9 +88,10 @@ public class PlayerContainer {
         Head head = new Head();
         WCResponse response = new WCResponse();
         head.setType(type);
-        response.setHead(head);
         ResBody body = new ResBody();
         body.setPlanes(plist);
+        response.setHead(head);
+        response.setBody(body);
         for (Plane p : plist) {
             head.setId(p.getId());
             String jstr = JSON.toJSONString(response,SerializerFeature.DisableCircularReferenceDetect);
