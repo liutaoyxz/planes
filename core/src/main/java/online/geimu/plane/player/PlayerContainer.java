@@ -64,7 +64,7 @@ public class PlayerContainer {
         frame.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                castMsg(Operator.MOVE_START.code());
+                castMsg(Operator.FRAME_INFO.code());
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
     }
