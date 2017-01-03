@@ -127,6 +127,7 @@ public class ContainerManager {
         Plane plane =new Plane(id,imgIndex,speed,0,0);
         plane.setSc(sc);
         plane.setWidth(width);
+        plane.setMap(map);
         plane.setHeight(height);
         plane.setColor(colors[plane.getImgIndex()]);
         ids.put(id,plane);

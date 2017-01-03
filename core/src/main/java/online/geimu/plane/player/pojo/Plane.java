@@ -90,8 +90,8 @@ public class Plane {
     }
 
     public void setMx(int x){
-        log.debug("设置x轴移动标识   ==> "+x);
         this.mx = x;
+        log.debug("设置x轴移动标识   ==> "+x);
     }
 
     public void setMy(int y){
@@ -166,6 +166,14 @@ public class Plane {
 
     public void setSc(SocketChannel sc) {
         this.sc = sc;
+    }
+
+    public TestMap getMap() {
+        return map;
+    }
+
+    public void setMap(TestMap map) {
+        this.map = map;
     }
 
     public static void main(String[] args) {

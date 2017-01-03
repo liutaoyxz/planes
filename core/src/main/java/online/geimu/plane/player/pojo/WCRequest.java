@@ -38,19 +38,6 @@ public  class WCRequest {
     }
 
     public static void main(String[] args) {
-        WCRequest req = new WCRequest();
-        Head head = new Head();
-        head.setPlayid("111");
-        head.setType(1);
-        ReqBody body = new ReqBody();
-        body.setEvent(new Event());
-        req.setHead(head);
-        req.setReqBody(body);
-        String sjson = JSON.toJSONString(req);
-        System.out.println(sjson);
-
-        WCRequest wcRequest = JSON.parseObject(sjson, WCRequest.class);
-        System.out.println(wcRequest);
 
     }
 }
