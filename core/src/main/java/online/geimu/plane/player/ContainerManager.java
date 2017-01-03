@@ -94,7 +94,9 @@ public class ContainerManager {
      * @param forward
      */
     public void move(String id,String forward){
+        log.debug("进入移动方法, 移动的方向是   ==> "+forward);
         Plane p = ids.get(id);
+        PlayerContainer pc = idps.get(id);
         if (forward.toLowerCase().equals("w")){
             p.setMy(-1);
         }else if (forward.toLowerCase().equals("s")){
