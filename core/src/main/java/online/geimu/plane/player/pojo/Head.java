@@ -7,20 +7,4 @@ public class Head extends AbstractCommonHead{
 
 
 
-    private int sump;
-
-    public final int getSump() {
-        return sump;
-    }
-
-    public final void setSump(int sump) {
-        this.sump = sump;
-    }
-
-    @Override
-    public String toString() {
-        return "Head{" +
-                "sump=" + sump +
-                '}';
-    }
 }
