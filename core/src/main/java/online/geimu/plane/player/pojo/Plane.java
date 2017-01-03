@@ -67,6 +67,7 @@ public class Plane {
 
             @Override
             public void run() {
+                log.debug("mx  :  "+mx+"  , my  :  "+my);
                 if (mx > 0){
                     px = Math.min((px+ width+speed),map.getX())-width;
                 }else if (mx < 0){
