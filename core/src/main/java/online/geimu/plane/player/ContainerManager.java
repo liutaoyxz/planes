@@ -76,6 +76,7 @@ public class ContainerManager {
         final int imgIndex = lastIndex.getAndAdd(1)%img_num;
         Plane plane = new Plane();
         plane.setId(id);
+        plane.setColor(colors[imgIndex]);
         plane.setImgIndex(imgIndex);
         Head head = new Head();
         head.setId(id);
