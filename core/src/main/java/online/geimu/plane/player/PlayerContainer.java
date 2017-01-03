@@ -123,7 +123,30 @@ public class PlayerContainer {
     }
 
     public void move(String id,String forward){
+        Plane p = idps.get(id);
+        if (forward.toLowerCase().equals("w")){
+            p.setMy(-1);
+        }else if (forward.toLowerCase().equals("s")){
+            p.setMy(1);
+        }else if (forward.toLowerCase().equals("a")){
+            p.setMx(-1);
+        }else if (forward.toLowerCase().equals("d")){
+            p.setMx(1);
+        }
+    }
 
+
+    public void stopMove(String id,String forword){
+        Plane p = idps.get(id);
+        if (forword.toLowerCase().equals("w")){
+            p.setMy(0);
+        }else if (forword.toLowerCase().equals("s")){
+            p.setMy(0);
+        }else if (forword.toLowerCase().equals("a")){
+            p.setMx(0);
+        }else if (forword.toLowerCase().equals("d")){
+            p.setMx(0);
+        }
     }
 
 }

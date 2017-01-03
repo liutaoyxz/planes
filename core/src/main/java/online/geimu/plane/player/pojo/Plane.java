@@ -63,18 +63,20 @@ public class Plane {
      */
     public void move(){
         log.debug(id+ "speed :"+speed+ " : 开启自动移动!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                log.debug("mx  :  "+mx+"  , my  :  "+my);
+                final int cx = mx;
+                final int cy = my;
+                log.debug("mx  :  "+cx+"  , my  :  "+cy);
                 if (mx > 0){
                     px = Math.min((px+ width+speed),map.getX())-width;
-                }else if (mx < 0){
+                }else if (cx < 0){
                     px = Math.max((px-speed),0);
                 }
 
-                if (my > 0){
+                if (cy > 0){
                     py = Math.min((py+ height+speed),map.getY())-height;
                 }else if (my < 0){
                     py = Math.max((py-speed),0);

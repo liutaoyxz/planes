@@ -95,35 +95,18 @@ public class ContainerManager {
      */
     public void move(String id,String forward){
         log.debug("进入移动方法, 移动的方向是   ==> "+forward);
-        Plane p = ids.get(id);
         PlayerContainer pc = idps.get(id);
-        if (forward.toLowerCase().equals("w")){
-            p.setMy(-1);
-        }else if (forward.toLowerCase().equals("s")){
-            p.setMy(1);
-        }else if (forward.toLowerCase().equals("a")){
-            p.setMx(-1);
-        }else if (forward.toLowerCase().equals("d")){
-            p.setMx(1);
-        }
+        pc.move(id,forward);
     }
 
     /**
      * 停止一个方向的移动
      * @param id
-     * @param forword
+     * @param forward
      */
-    public void stopMove(String id,String forword){
-        Plane p = ids.get(id);
-        if (forword.toLowerCase().equals("w")){
-            p.setMy(0);
-        }else if (forword.toLowerCase().equals("s")){
-            p.setMy(0);
-        }else if (forword.toLowerCase().equals("a")){
-            p.setMx(0);
-        }else if (forword.toLowerCase().equals("d")){
-            p.setMx(0);
-        }
+    public void stopMove(String id,String forward){
+        PlayerContainer pc = idps.get(id);
+        pc.stopMove(id,forward);
     }
 
 
