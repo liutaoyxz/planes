@@ -65,8 +65,9 @@ public class OperatorHandler {
                 int mapy = body.getInteger("mapy");
                 int width = body.getInteger("width");
                 int height = body.getInteger("height");
+                int imgIndex = body.getInteger("imgIndex");
                 int speed = body.getInteger("speed");
-                cm.ready(sc,mapx,mapy,width,height,speed);
+                cm.ready(sc,imgIndex,mapx,mapy,width,height,speed);
                 break;
             case MOVE_START:
                 //按下方向键

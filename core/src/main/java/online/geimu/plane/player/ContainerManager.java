@@ -73,6 +73,7 @@ public class ContainerManager {
      * @param id
      */
     public void addPlayerAndStart(String id, String request, SocketChannel sc){
+        final int imgIndex = lastIndex.getAndAdd(1)%img_num;
         Head head = new Head();
         head.setId(id);
         head.setType(Operator.NEW_PLAYER.code());
@@ -123,17 +124,17 @@ public class ContainerManager {
     /**
      * 准备
      * @param sc
+     * @param imgIndex 飞机索引
      * @param mapx 地图x
      * @param mapy 地图y
      * @param width  飞机宽度
      * @param height  飞机长度
      * @param speed  飞机速度
      */
-    public void ready(SocketChannel sc,int mapx,int mapy,int width,int height,int speed){
-        final int imgIndex = lastIndex.getAndAdd(1);
+    public void ready(SocketChannel sc,int imgIndex,int mapx,int mapy,int width,int height,int speed){
         final String id = sc.id().toString();
         TestMap map = new TestMap(mapx,mapy);
-        Plane plane =new Plane(id,imgIndex%img_num,speed,0,0);
+        Plane plane =new Plane(id,imgIndex,speed,0,0);
         plane.setSc(sc);
         plane.setWidth(width);
         plane.setHeight(height);

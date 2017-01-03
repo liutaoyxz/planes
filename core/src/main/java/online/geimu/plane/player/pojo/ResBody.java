@@ -14,6 +14,16 @@ public class ResBody extends AbstractCommonBody {
         return planes;
     }
 
+    public Plane plane;
+
+    public Plane getPlane() {
+        return plane;
+    }
+
+    public void setPlane(Plane plane) {
+        this.plane = plane;
+    }
+
     public void setPlanes(List<Plane> planes) {
         this.planes = planes;
     }

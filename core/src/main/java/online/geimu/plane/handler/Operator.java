@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by ltlxy on 2017/1/2.
  */
 public enum Operator {
-    NEW_PLAYER("新玩家进入",0),
+    NEW_PLAYER("新玩家进入,返回玩家id",0),
     READY_START("准备",1),
     MOVE_START("玩家开始移动",2),
     MOVE_STOP("取消移动",3),
