@@ -30,7 +30,7 @@ public class Plane {
     private String id; //玩家id
     @JSONField(serialize = false)
     private int speed; //速度
-
+    @JSONField(serialize = false)
     private SocketChannel sc; //玩家频道
 
     private int width; //x 的大小

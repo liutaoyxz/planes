@@ -149,4 +149,12 @@ public class PlayerContainer {
         }
     }
 
+    public List<String> getIds(){
+        List<String> list = new ArrayList();
+        for (Plane p : plist){
+            list.add(p.getId());
+        }
+        return list;
+    }
+
 }
