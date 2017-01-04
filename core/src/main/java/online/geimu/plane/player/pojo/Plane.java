@@ -40,10 +40,18 @@ public class Plane {
     private int px;  //x轴位置
 
     private int py;  //y轴位置
+    //上
     @JSONField(serialize = false)
-    private volatile int mx; //x 轴移动标识
+    private volatile int w;
+    //下
     @JSONField(serialize = false)
-    private volatile int my;  //y 轴移动标识
+    private volatile int s;
+    //左
+    @JSONField(serialize = false)
+    private volatile int a;
+    //右
+    @JSONField(serialize = false)
+    private volatile int d;
 
     public Plane(String id,int imgIndex ,int speed, int px, int py) {
         this.id = id;
@@ -66,8 +74,8 @@ public class Plane {
         scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                final int cx = plane.mx;
-                final int cy = plane.my;
+                final int cx = plane.getMx();
+                final int cy = plane.getMy();
                 if (cx > 0){
                     px = Math.min((px+ width+speed),map.getX())-width;
                 }else if (cx < 0){
@@ -83,22 +91,44 @@ public class Plane {
         },0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
     }
 
+    public void stopForward(String forward){
+        if (forward.toLowerCase().equals("w") ){
+            w = 0;
+        }else if (forward.toLowerCase().equals("s") ){
+            s = 0;
+        }else if (forward.toLowerCase().equals("a") ){
+            a = 0;
+        }else if (forward.toLowerCase().equals("d") ){
+            d = 0;
+        }
+    }
+
+    public void startForward(String forward){
+        if (forward.toLowerCase().equals("w")) {
+            w = s+1;
+        } else if (forward.toLowerCase().equals("s")) {
+            s = w+1;
+        } else if (forward.toLowerCase().equals("a")) {
+            a = d+1;
+        } else if (forward.toLowerCase().equals("d")) {
+            d = a+1;
+        }
+    }
+
     public void stopMove(){
         scheduledExecutorService.shutdown();
     }
 
-    public void setMx(int x){
-        this.mx = x;
+
+    public int getMx(){
+        return d-a;
     }
 
-    public void setMy(int y){
-        this.my = y;
+    public int getMy(){
+        return s-w;
     }
 
-    public void setMXY(int x, int y){
-        this.mx = x;
-        this.my = y;
-    }
+
 
     public int getImgIndex() {
         return imgIndex;

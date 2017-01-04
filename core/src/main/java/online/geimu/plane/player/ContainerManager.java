@@ -33,17 +33,19 @@ public class ContainerManager {
     }
 
     private final Logger log = Logger.getLogger(ContainerManager.class);
-
+    @SuppressWarnings("unchecked")
     private final ConcurrentHashMap<String,PlayerContainer> idps = new ConcurrentHashMap();
 
     /**
      * 已经准备的玩家的id集合
      */
+    @SuppressWarnings("unchecked")
     private CopyOnWriteArrayList<String> readyIds = new CopyOnWriteArrayList();
 
     /**
      * id和player 映射
      */
+    @SuppressWarnings("unchecked")
     private final ConcurrentHashMap<String, Plane> ids = new ConcurrentHashMap();
 
 

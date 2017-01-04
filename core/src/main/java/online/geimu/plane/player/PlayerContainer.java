@@ -94,8 +94,8 @@ public class PlayerContainer {
         response.setBody(body);
         for (Plane p : plist) {
             head.setId(p.getId());
-            String jstr = JSON.toJSONString(response,SerializerFeature.DisableCircularReferenceDetect);
-            log.debug(OperatorHandler.SEND+jstr);
+            String jstr = JSON.toJSONString(response, SerializerFeature.DisableCircularReferenceDetect);
+            log.debug(OperatorHandler.SEND + jstr);
             p.getSc().writeAndFlush(new TextWebSocketFrame(jstr));
         }
     }
@@ -122,36 +122,20 @@ public class PlayerContainer {
         }
     }
 
-    public void move(String id,String forward){
+    public void move(String id, String forward) {
         Plane p = idps.get(id);
-        if (forward.toLowerCase().equals("w")){
-            p.setMy(-1);
-        }else if (forward.toLowerCase().equals("s")){
-            p.setMy(1);
-        }else if (forward.toLowerCase().equals("a")){
-            p.setMx(-1);
-        }else if (forward.toLowerCase().equals("d")){
-            p.setMx(1);
-        }
+        p.startForward(forward);
     }
 
 
-    public void stopMove(String id,String forword){
+    public void stopMove(String id, String forword) {
         Plane p = idps.get(id);
-        if (forword.toLowerCase().equals("w")){
-            p.setMy(0);
-        }else if (forword.toLowerCase().equals("s")){
-            p.setMy(0);
-        }else if (forword.toLowerCase().equals("a")){
-            p.setMx(0);
-        }else if (forword.toLowerCase().equals("d")){
-            p.setMx(0);
-        }
+        p.stopForward(forword);
     }
 
-    public List<String> getIds(){
+    public List<String> getIds() {
         List<String> list = new ArrayList();
-        for (Plane p : plist){
+        for (Plane p : plist) {
             list.add(p.getId());
         }
         return list;
