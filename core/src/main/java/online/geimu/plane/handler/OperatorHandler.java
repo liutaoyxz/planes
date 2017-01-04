@@ -89,6 +89,10 @@ public class OperatorHandler {
             case TIME_RECEIVE:
                 //发送延迟
                 break;
+            case SHOOT:
+                //开枪
+                cm.shoot(pid);
+                break;
             default:
                 break;
         }

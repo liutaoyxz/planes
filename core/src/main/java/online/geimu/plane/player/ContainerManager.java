@@ -147,6 +147,14 @@ public class ContainerManager {
 
     }
 
+    /**
+     * 开枪
+     * @param id
+     */
+    public void shoot(String id){
+        PlayerContainer pc = idps.get(id);
+        pc.shoot(id);
+    }
 
 
     /**

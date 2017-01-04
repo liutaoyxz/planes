@@ -1,5 +1,7 @@
 package online.geimu.plane.player.pojo;
 
+import online.geimu.plane.player.pojo.map.Obj;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,8 @@ public class ResBody extends AbstractCommonBody {
         return planes;
     }
 
+    public List<Obj> eb = new ArrayList();
+
     public Plane plane;
 
     public Plane getPlane() {
@@ -26,5 +30,13 @@ public class ResBody extends AbstractCommonBody {
 
     public void setPlanes(List<Plane> planes) {
         this.planes = planes;
+    }
+
+    public List<Obj> getEb() {
+        return eb;
+    }
+
+    public void setEb(List<Obj> eb) {
+        this.eb = eb;
     }
 }

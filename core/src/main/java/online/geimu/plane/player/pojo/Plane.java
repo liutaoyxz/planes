@@ -158,6 +158,14 @@ public class Plane {
         return py;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
     public void setPy(int py) {
         this.py = py;
     }

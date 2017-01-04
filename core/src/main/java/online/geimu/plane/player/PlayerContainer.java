@@ -1,12 +1,14 @@
 package online.geimu.plane.player;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.*;
+import online.geimu.plane.player.pojo.map.Obj;
 import org.apache.log4j.Logger;
 
 
@@ -31,6 +33,11 @@ public class PlayerContainer {
      */
     private final ScheduledExecutorService frame = Executors.newScheduledThreadPool(1);
 
+    /**
+     * 子弹线程
+     */
+    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(1);
+
     //本局飞机数组
     private final List<Plane> plist = new ArrayList();
 
@@ -40,6 +47,11 @@ public class PlayerContainer {
      */
     @SuppressWarnings("unchecked")
     private final Map<String, Plane> idps = new HashMap();
+
+    /**
+     * 子弹数组
+     */
+    private final List<Obj> eb = new ArrayList();
 
     private volatile String content;
 
@@ -61,12 +73,27 @@ public class PlayerContainer {
         for (Plane p : plist) {
             p.move();
         }
+        bframe.scheduleAtFixedRate( new Runnable() {
+            @Override
+            public void run() {
+                Iterator<? extends Obj> it = eb.iterator();
+                while (it.hasNext()){
+                    Obj next = it.next();
+                    boolean b = next.move();
+                    if (!b){
+                        it.remove();
+                    }
+                }
+            }
+        }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
         frame.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 castMsg(Operator.FRAME_INFO.code());
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
+
+
     }
 
     /**
@@ -89,6 +116,7 @@ public class PlayerContainer {
         WCResponse response = new WCResponse();
         head.setType(type);
         ResBody body = new ResBody();
+        body.setEb(eb);
         body.setPlanes(plist);
         response.setHead(head);
         response.setBody(body);
@@ -140,5 +168,21 @@ public class PlayerContainer {
         }
         return list;
     }
+
+
+    /**
+     * 开枪
+     * @param id
+     */
+    public void shoot(String id){
+        Plane plane = idps.get(id);
+        final int px = plane.getPx();
+        final int py = plane.getPy();
+        final int width = plane.getWidth();
+        final int speed = plane.getSpeed();
+        Obj o = new Bullet(px+width/2,py,2*speed);
+        eb.add(o);
+    }
+
 
 }

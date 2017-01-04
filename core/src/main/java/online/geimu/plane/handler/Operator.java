@@ -15,7 +15,8 @@ public enum Operator {
     TIME_SEND("发送时间戳",5),
     TIME_RECEIVE("收到时间戳",6),
     GAME_STOP("游戏结束",7),
-    FRAME_INFO("游戏帧信息",8);
+    FRAME_INFO("游戏帧信息",8),
+    SHOOT("开枪",9);
 
     private static final Map<Integer,Operator> intToEnum = new HashMap<Integer, Operator>();
 

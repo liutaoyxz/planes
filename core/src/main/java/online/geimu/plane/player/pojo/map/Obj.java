@@ -13,7 +13,7 @@ public interface Obj {
      * 移动
      *
      */
-    void move();
+    boolean move();
 
     /**
      * 检测x轴是否碰撞
