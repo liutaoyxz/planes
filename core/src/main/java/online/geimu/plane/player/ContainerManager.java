@@ -12,6 +12,7 @@ import online.geimu.plane.player.pojo.WCResponse;
 import online.geimu.plane.player.pojo.map.TestMap;
 import org.apache.log4j.Logger;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -165,6 +166,11 @@ public class ContainerManager {
         PlayerContainer pc = idps.get(id);
         List<String> ids = pc.getIds();
         pc.stop();
+        Iterator<String> it = readyIds.iterator();
+        while (it.hasNext()){
+            if (id.equals(it.next()))
+                it.remove();
+        }
         for (String pid : ids){
             idps.remove(pid);
             this.ids.remove(pid);
