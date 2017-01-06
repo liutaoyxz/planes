@@ -7,7 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
-import online.geimu.plane.player.ContainerManager;
+import online.geimu.plane.player.manager.ContainerManager;
 import org.apache.log4j.Logger;
 
 import java.net.SocketAddress;

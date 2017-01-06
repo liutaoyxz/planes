@@ -3,9 +3,7 @@ package online.geimu.plane.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.socket.SocketChannel;
-import online.geimu.plane.player.ContainerManager;
-
-import static online.geimu.plane.handler.Operator.NEW_PLAYER;
+import online.geimu.plane.player.manager.ContainerManager;
 
 /**
  * @author liutao

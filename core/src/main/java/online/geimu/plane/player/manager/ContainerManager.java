@@ -1,4 +1,4 @@
-package online.geimu.plane.player;
+package online.geimu.plane.player.manager;
 
 import com.alibaba.fastjson.JSON;
 import io.netty.channel.socket.SocketChannel;
@@ -34,7 +34,7 @@ public class ContainerManager {
 
     private final Logger log = Logger.getLogger(ContainerManager.class);
     @SuppressWarnings("unchecked")
-    private final ConcurrentHashMap<String,PlayerContainer> idps = new ConcurrentHashMap();
+    private final ConcurrentHashMap<String,GameManager> idps = new ConcurrentHashMap();
 
     /**
      * 已经准备的玩家的id集合
@@ -64,7 +64,7 @@ public class ContainerManager {
      */
     private final AtomicInteger lastIndex = new AtomicInteger(0);
 
-    private PlayerContainer pc = new PlayerContainer();
+    private GameManager pc = new GameManager();
 
     /**
      * 飞机颜色
@@ -97,7 +97,7 @@ public class ContainerManager {
      * @param forward
      */
     public void move(String id,String forward){
-        PlayerContainer pc = idps.get(id);
+        GameManager pc = idps.get(id);
         pc.move(id,forward);
     }
 
@@ -107,7 +107,7 @@ public class ContainerManager {
      * @param forward
      */
     public void stopMove(String id,String forward){
-        PlayerContainer pc = idps.get(id);
+        GameManager pc = idps.get(id);
         pc.stopMove(id,forward);
     }
 
@@ -142,7 +142,7 @@ public class ContainerManager {
             readyIds.clear();
             pc.castMsg(Operator.READY_START.code());
             pc.start();
-            pc = new PlayerContainer();
+            pc = new GameManager();
         }
 
     }
@@ -152,7 +152,7 @@ public class ContainerManager {
      * @param id
      */
     public void shoot(String id){
-        PlayerContainer pc = idps.get(id);
+        GameManager pc = idps.get(id);
         pc.shoot(id);
     }
 
@@ -163,7 +163,7 @@ public class ContainerManager {
      */
     public void stop(String id){
         readyIds.remove(id);
-        PlayerContainer pc = idps.get(id);
+        GameManager pc = idps.get(id);
         if (pc != null){
             List<String> ids = pc.getIds();
             pc.stop();

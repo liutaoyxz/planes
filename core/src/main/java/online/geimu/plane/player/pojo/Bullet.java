@@ -44,7 +44,7 @@ public class Bullet implements Obj{
 
     @Override
     public void refreshPosition() {
-
+        move();
     }
 
 

@@ -1,4 +1,4 @@
-package online.geimu.plane.player;
+package online.geimu.plane.player.manager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -20,10 +20,10 @@ import java.util.concurrent.*;
 /**
  * Created by ltlxy on 2016/11/28.
  */
-public class PlayerContainer {
+public class GameManager {
 
 
-    private static final Logger log = Logger.getLogger(PlayerContainer.class);
+    private static final Logger log = Logger.getLogger(GameManager.class);
 
     /**
      * 延迟测量
@@ -59,11 +59,11 @@ public class PlayerContainer {
 
     private SocketChannel sc;
 
-    public PlayerContainer(SocketChannel sc) {
+    public GameManager(SocketChannel sc) {
         this.sc = sc;
     }
 
-    public PlayerContainer() {
+    public GameManager() {
     }
 
     /**

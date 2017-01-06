@@ -15,4 +15,5 @@ public abstract class AbstractEnemyPlane implements Obj{
     private int y;
 
 
+
 }
