@@ -1,7 +1,6 @@
 package online.geimu.plane.player.pojo;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import online.geimu.plane.player.pojo.map.Obj;
 
 /**
  * Created by ltlxy on 2017/1/1.

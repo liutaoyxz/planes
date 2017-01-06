@@ -1,7 +1,8 @@
-package online.geimu.plane.player.pojo;
+package online.geimu.plane.protocol;
 
 
 import io.netty.channel.socket.SocketChannel;
+import online.geimu.plane.player.pojo.Plane;
 
 /**
  * Created by ltlxy on 2016/11/29.

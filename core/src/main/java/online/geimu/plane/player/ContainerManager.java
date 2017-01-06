@@ -5,14 +5,13 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
-import online.geimu.plane.player.pojo.Head;
+import online.geimu.plane.protocol.Head;
 import online.geimu.plane.player.pojo.Plane;
-import online.geimu.plane.player.pojo.ResBody;
-import online.geimu.plane.player.pojo.WCResponse;
+import online.geimu.plane.protocol.ResBody;
+import online.geimu.plane.protocol.WCResponse;
 import online.geimu.plane.player.pojo.map.TestMap;
 import org.apache.log4j.Logger;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -163,17 +162,15 @@ public class ContainerManager {
      * @param id
      */
     public void stop(String id){
+        readyIds.remove(id);
         PlayerContainer pc = idps.get(id);
-        List<String> ids = pc.getIds();
-        pc.stop();
-        Iterator<String> it = readyIds.iterator();
-        while (it.hasNext()){
-            if (id.equals(it.next()))
-                it.remove();
-        }
-        for (String pid : ids){
-            idps.remove(pid);
-            this.ids.remove(pid);
+        if (pc != null){
+            List<String> ids = pc.getIds();
+            pc.stop();
+            for (String pid : ids){
+                idps.remove(pid);
+                this.ids.remove(pid);
+            }
         }
     }
 

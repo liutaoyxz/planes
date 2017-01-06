@@ -91,6 +91,10 @@ public class Plane {
         },0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * 设置单个方向的停止
+     * @param forward
+     */
     public void stopForward(String forward){
         if (forward.toLowerCase().equals("w") ){
             w = 0;
@@ -103,6 +107,10 @@ public class Plane {
         }
     }
 
+    /**
+     * 设置单个方向的移动开始,但是不取消它相反方向正在进行的移动
+     * @param forward 移动方向的标识字符
+     */
     public void startForward(String forward){
         if (forward.toLowerCase().equals("w")) {
             w = s+1;
@@ -120,10 +128,18 @@ public class Plane {
     }
 
 
+    /**
+     * 返回x轴的移动情况.
+     * @return  {@inheritDoc <0 代表正在向左移动 , >0代表正在向右移动, =0代表x轴不移动}
+     */
     public int getMx(){
         return d-a;
     }
 
+    /**
+     * 返回y轴的移动情况.
+     * @return {@inheritDoc <0 代表正在向上移动 , >0代表正在向下移动, =0代表y轴不移动 }
+     */
     public int getMy(){
         return s-w;
     }

@@ -1,6 +1,7 @@
-package online.geimu.plane.player.pojo;
+package online.geimu.plane.protocol;
 
-import online.geimu.plane.player.pojo.map.Obj;
+import online.geimu.plane.player.pojo.Obj;
+import online.geimu.plane.player.pojo.Plane;
 
 import java.util.ArrayList;
 import java.util.List;

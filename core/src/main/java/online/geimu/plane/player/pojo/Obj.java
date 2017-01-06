@@ -1,4 +1,4 @@
-package online.geimu.plane.player.pojo.map;
+package online.geimu.plane.player.pojo;
 
 /**
  * Created by ltlxy on 2016/12/20.

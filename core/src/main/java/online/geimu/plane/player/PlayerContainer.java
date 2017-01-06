@@ -1,14 +1,16 @@
 package online.geimu.plane.player;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.*;
-import online.geimu.plane.player.pojo.map.Obj;
+import online.geimu.plane.player.pojo.Obj;
+import online.geimu.plane.protocol.Head;
+import online.geimu.plane.protocol.ResBody;
+import online.geimu.plane.protocol.WCResponse;
 import org.apache.log4j.Logger;
 
 
@@ -100,6 +102,7 @@ public class PlayerContainer {
      * 停止本局游戏
      */
     public void stop() {
+        bframe.shutdownNow();
         frame.shutdownNow();
         for (Plane p : plist) {
             p.stopMove();

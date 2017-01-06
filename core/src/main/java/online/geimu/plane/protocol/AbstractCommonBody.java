@@ -1,4 +1,4 @@
-package online.geimu.plane.player.pojo;
+package online.geimu.plane.protocol;
 
 import java.util.List;
 

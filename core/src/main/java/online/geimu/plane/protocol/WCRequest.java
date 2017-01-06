@@ -1,7 +1,5 @@
-package online.geimu.plane.player.pojo;
+package online.geimu.plane.protocol;
 
-
-import com.alibaba.fastjson.JSON;
 
 /**
  * Created by ltlxy on 2016/11/29.
