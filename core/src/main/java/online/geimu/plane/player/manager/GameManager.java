@@ -55,7 +55,7 @@ public class GameManager {
     /**
      * 子弹数组
      */
-    private final List<Obj> eb = new ArrayList();
+    private final List<IndependentObj> eb = new ArrayList();
 
     private volatile String content;
 
@@ -80,9 +80,9 @@ public class GameManager {
         bframe.scheduleAtFixedRate( new Runnable() {
             @Override
             public void run() {
-                Iterator<? extends Obj> it = eb.iterator();
+                Iterator<? extends IndependentObj> it = eb.iterator();
                 while (it.hasNext()){
-                    Obj next = it.next();
+                    IndependentObj next = it.next();
                     boolean b = next.move();
                     if (!b){
                         it.remove();
@@ -185,7 +185,7 @@ public class GameManager {
         final int py = plane.getPy();
         final int width = plane.getWidth();
         final int speed = plane.getSpeed();
-        Obj o = new TestBullet(px+width/2,py,2*speed);
+        IndependentObj o = new TestBullet(px+width/2,py,2*speed);
         eb.add(o);
     }
 

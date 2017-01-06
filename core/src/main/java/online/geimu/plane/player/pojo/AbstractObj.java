@@ -1,8 +1,6 @@
 package online.geimu.plane.player.pojo;
 
 
-import online.geimu.plane.player.pojo.Obj;
-
 /**
  * Created by ltlxy on 2016/12/20.
  */

@@ -9,25 +9,20 @@ package online.geimu.plane.player.pojo;
  */
 public interface Obj {
 
-    /**
-     * 移动
-     *
-     */
-    boolean move();
+
 
     /**
      * 检测碰撞
-     * @param x
      * @return
      */
-    boolean checkCollision(int x);
-
+    Obj checkCollision();
 
 
     /**
-     * 刷新位置
-     *
+     * 获得这个物体的位置
+     * @return
      */
-    void refreshPosition();
+    Position getPosition();
+
 
 }

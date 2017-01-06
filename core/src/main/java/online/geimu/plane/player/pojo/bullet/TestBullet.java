@@ -1,13 +1,15 @@
 package online.geimu.plane.player.pojo.bullet;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import online.geimu.plane.player.pojo.IndependentObj;
 import online.geimu.plane.player.pojo.Obj;
+import online.geimu.plane.player.pojo.Position;
 
 /**
  * Created by ltlxy on 2017/1/1.
  * 子弹类
  */
-public class TestBullet implements Obj {
+public class TestBullet implements IndependentObj {
 
     private int x;
 
@@ -35,15 +37,14 @@ public class TestBullet implements Obj {
     }
 
     @Override
-    public boolean checkCollision(int x) {
-        return false;
+    public Obj checkCollision() {
+        return null;
     }
 
     @Override
-    public void refreshPosition() {
-        move();
+    public Position getPosition() {
+        return new Position(this.x,this.y);
     }
-
 
     public int getX() {
         return x;

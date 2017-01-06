@@ -1,5 +1,6 @@
 package online.geimu.plane.protocol;
 
+import online.geimu.plane.player.pojo.IndependentObj;
 import online.geimu.plane.player.pojo.Obj;
 import online.geimu.plane.player.pojo.Plane;
 
@@ -17,7 +18,7 @@ public class ResBody extends AbstractCommonBody {
         return planes;
     }
 
-    public List<Obj> eb = new ArrayList();
+    public List<IndependentObj> eb = new ArrayList();
 
     public Plane plane;
 
@@ -33,11 +34,11 @@ public class ResBody extends AbstractCommonBody {
         this.planes = planes;
     }
 
-    public List<Obj> getEb() {
+    public List<IndependentObj> getEb() {
         return eb;
     }
 
-    public void setEb(List<Obj> eb) {
+    public void setEb(List<IndependentObj> eb) {
         this.eb = eb;
     }
 }
