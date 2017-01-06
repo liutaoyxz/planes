@@ -16,18 +16,13 @@ public interface Obj {
     boolean move();
 
     /**
-     * 检测x轴是否碰撞
+     * 检测碰撞
      * @param x
      * @return
      */
-    boolean checkX(int x);
+    boolean checkCollision(int x);
 
-    /**
-     * 检测y轴碰撞
-     * @param y
-     * @return
-     */
-    boolean checkY(int y);
+
 
     /**
      * 刷新位置

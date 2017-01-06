@@ -8,6 +8,7 @@ import online.geimu.plane.handler.Operator;
 import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.*;
 import online.geimu.plane.player.pojo.Obj;
+import online.geimu.plane.player.pojo.bullet.TestBullet;
 import online.geimu.plane.protocol.Head;
 import online.geimu.plane.protocol.ResBody;
 import online.geimu.plane.protocol.WCResponse;
@@ -19,6 +20,7 @@ import java.util.concurrent.*;
 
 /**
  * Created by ltlxy on 2016/11/28.
+ * 游戏管理
  */
 public class GameManager {
 
@@ -183,7 +185,7 @@ public class GameManager {
         final int py = plane.getPy();
         final int width = plane.getWidth();
         final int speed = plane.getSpeed();
-        Obj o = new Bullet(px+width/2,py,2*speed);
+        Obj o = new TestBullet(px+width/2,py,2*speed);
         eb.add(o);
     }
 

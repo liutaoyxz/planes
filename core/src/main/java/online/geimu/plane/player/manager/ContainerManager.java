@@ -19,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by ltlxy on 2016/11/28.
+ * 容器管理
  */
 public class ContainerManager {
 

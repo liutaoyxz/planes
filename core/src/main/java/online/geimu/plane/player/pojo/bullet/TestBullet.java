@@ -1,12 +1,13 @@
-package online.geimu.plane.player.pojo;
+package online.geimu.plane.player.pojo.bullet;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import online.geimu.plane.player.pojo.Obj;
 
 /**
  * Created by ltlxy on 2017/1/1.
  * 子弹类
  */
-public class Bullet implements Obj{
+public class TestBullet implements Obj {
 
     private int x;
 
@@ -17,10 +18,11 @@ public class Bullet implements Obj{
     @JSONField(serialize = false)
     private int type;
 
-    public Bullet(int x,int y,int speed){
+    public TestBullet(int x, int y, int speed){
         this.speed = speed;
         this.x = x;
         this.y = y;
+
     }
 
     @Override
@@ -33,12 +35,7 @@ public class Bullet implements Obj{
     }
 
     @Override
-    public boolean checkX(int x) {
-        return false;
-    }
-
-    @Override
-    public boolean checkY(int y) {
+    public boolean checkCollision(int x) {
         return false;
     }
 

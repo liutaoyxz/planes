@@ -1,6 +1,6 @@
 package online.geimu.plane.player.pojo.arms;
 
-import online.geimu.plane.player.pojo.Bullet;
+import online.geimu.plane.player.pojo.Obj;
 
 /**
  * @author liutao
@@ -9,6 +9,6 @@ import online.geimu.plane.player.pojo.Bullet;
  */
 public interface Gun {
 
-    Bullet shoot();
+    Obj shoot();
 
 }
