@@ -1,6 +1,7 @@
 package online.geimu.plane.player.pojo;
 
 
+
 /**
  * @author liutao
  * @description :  位置信息
@@ -32,5 +33,15 @@ public class Position {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Position))
+            return false;
+        Position p2 = (Position)obj;
+        if (p2.getX() == x && p2.getY() == y)
+            return true;
+        return false;
     }
 }
