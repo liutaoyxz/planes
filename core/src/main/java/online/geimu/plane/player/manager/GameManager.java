@@ -9,6 +9,8 @@ import online.geimu.plane.handler.OperatorHandler;
 import online.geimu.plane.player.pojo.*;
 import online.geimu.plane.player.pojo.Obj;
 import online.geimu.plane.player.pojo.bullet.TestBullet;
+import online.geimu.plane.player.pojo.enemy.AbstractEnemyPlane;
+import online.geimu.plane.player.pojo.enemy.TestEnemyPlane;
 import online.geimu.plane.protocol.Head;
 import online.geimu.plane.protocol.ResBody;
 import online.geimu.plane.protocol.WCResponse;
@@ -57,6 +59,8 @@ public class GameManager {
      */
     private final List<IndependentObj> eb = new ArrayList();
 
+    private final List<IndependentObj> ep = new ArrayList<>();
+
     private volatile String content;
 
     private SocketChannel sc;
@@ -96,7 +100,7 @@ public class GameManager {
                 castMsg(Operator.FRAME_INFO.code());
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
-
+        ep.add(TestEnemyPlane.newInstance(1,100,100,plist.get(0).getMap()));
 
     }
 
