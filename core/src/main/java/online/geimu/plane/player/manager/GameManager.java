@@ -29,23 +29,15 @@ public class GameManager {
 
     private static final Logger log = Logger.getLogger(GameManager.class);
 
-    /**
-     * 延迟测量
-     */
-    private final ScheduledExecutorService delay = Executors.newScheduledThreadPool(1);
 
-    /**
-     * 屏幕画面发送
-     */
-    private final ScheduledExecutorService frame = Executors.newScheduledThreadPool(1);
 
     /**
      * 子弹线程
      */
-    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(2);
+    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(3);
 
     //本局飞机数组
-    private final List<Plane> plist = new ArrayList();
+    private final List<Plane> plist = new ArrayList<>();
 
     /**
      * id 玩家映射,没有使用{@link ConcurrentHashMap},{@link ConcurrentHashMap}在存储数据较少的情况下性能感觉不比同步的Map高.
@@ -57,7 +49,7 @@ public class GameManager {
     /**
      * 子弹数组
      */
-    private final List<IndependentObj> eb = new ArrayList();
+    private final List<IndependentObj> eb = new ArrayList<>();
 
     private final List<IndependentObj> ep = new ArrayList<>();
 
@@ -108,7 +100,7 @@ public class GameManager {
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
 
-        frame.scheduleAtFixedRate(new Runnable() {
+        bframe.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 castMsg(Operator.FRAME_INFO.code());
@@ -123,7 +115,6 @@ public class GameManager {
      */
     public void stop() {
         bframe.shutdownNow();
-        frame.shutdownNow();
         for (Plane p : plist) {
             p.stopMove();
             castMsg(Operator.GAME_STOP.code());
