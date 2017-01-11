@@ -20,9 +20,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class TestEnemyPlane extends AbstractEnemyPlane {
 
-    @JSONField(serialize = false)
     private int width;
-    @JSONField(serialize = false)
+
     private int height;
     @JSONField(serialize = false)
     private int speed;
