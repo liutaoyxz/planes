@@ -15,15 +15,15 @@ public class ResBody extends AbstractCommonBody {
 
     private List<Plane> planes = new ArrayList();
 
-    public List<Plane> getPlanes() {
+    private List<Plane> getPlanes() {
         return planes;
     }
 
-    public List<IndependentObj> eb = new ArrayList();
+    private List<IndependentObj> eb = new ArrayList();
 
-    public List<IndependentObj> ep = new ArrayList<>();
+    private List<IndependentObj> ep = new ArrayList<>();
 
-    public Plane plane;
+    private Plane plane;
 
     public Plane getPlane() {
         return plane;

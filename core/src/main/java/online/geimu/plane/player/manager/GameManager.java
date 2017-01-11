@@ -127,6 +127,7 @@ public class GameManager {
         ResBody body = new ResBody();
         body.setEb(eb);
         body.setPlanes(plist);
+        body.setEp(ep);
         response.setHead(head);
         response.setBody(body);
         for (Plane p : plist) {
