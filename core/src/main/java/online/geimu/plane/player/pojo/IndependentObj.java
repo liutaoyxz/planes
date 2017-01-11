@@ -13,4 +13,6 @@ public interface IndependentObj extends Obj {
      */
     boolean move();
 
+    boolean checkMoveable();
+
 }

@@ -52,7 +52,7 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
         TestEnemyPlane instance = new TestEnemyPlane(speed, width, height, map);
         instance.map = map;
         instance.debut();
-        instance.initAutoMove();
+//        instance.initAutoMove();
         return instance;
     }
 
@@ -133,6 +133,11 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
             }
         },0l,OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
 
+    }
+
+    @Override
+    public boolean checkMoveable(){
+        return isDebut;
     }
 
 

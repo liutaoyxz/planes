@@ -42,6 +42,11 @@ public class TestBullet implements IndependentObj {
     }
 
     @Override
+    public boolean checkMoveable() {
+        return true;
+    }
+
+    @Override
     public Position getPosition() {
         return new Position(this.x,this.y);
     }

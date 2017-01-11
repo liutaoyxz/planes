@@ -42,7 +42,7 @@ public class GameManager {
     /**
      * 子弹线程
      */
-    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(2);
 
     //本局飞机数组
     private final List<Plane> plist = new ArrayList();
@@ -94,6 +94,20 @@ public class GameManager {
                 }
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
+
+        bframe.scheduleAtFixedRate( new Runnable() {
+            @Override
+            public void run() {
+                Iterator<? extends IndependentObj> it = ep.iterator();
+                while (it.hasNext()){
+                    IndependentObj next = it.next();
+                    if (next.checkMoveable()){
+                        next.move();
+                    }
+                }
+            }
+        }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
+
         frame.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
