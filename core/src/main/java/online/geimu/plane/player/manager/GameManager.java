@@ -37,7 +37,7 @@ public class GameManager {
     private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(3);
 
     //本局飞机数组
-    private final List<Plane> plist = new ArrayList<>();
+    private final List<Plane> plist = new ArrayList();
 
     /**
      * id 玩家映射,没有使用{@link ConcurrentHashMap},{@link ConcurrentHashMap}在存储数据较少的情况下性能感觉不比同步的Map高.

@@ -13,13 +13,9 @@ import java.util.List;
  */
 public class ResBody extends AbstractCommonBody {
 
-    private List<Plane> planes = new ArrayList();
+    private List<Plane> planes = new ArrayList<>();
 
-    private List<Plane> getPlanes() {
-        return planes;
-    }
-
-    private List<IndependentObj> eb = new ArrayList();
+    private List<IndependentObj> eb = new ArrayList<>();
 
     private List<IndependentObj> ep = new ArrayList<>();
 
@@ -29,6 +25,10 @@ public class ResBody extends AbstractCommonBody {
         return plane;
     }
 
+    public List<Plane> getPlanes() {
+        return planes;
+    }
+
     public List<IndependentObj> getEp() {
         return ep;
     }
@@ -36,6 +36,7 @@ public class ResBody extends AbstractCommonBody {
     public void setEp(List<IndependentObj> ep) {
         this.ep = ep;
     }
+
 
     public void setPlane(Plane plane) {
         this.plane = plane;
