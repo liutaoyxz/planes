@@ -52,7 +52,6 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
         TestEnemyPlane instance = new TestEnemyPlane(speed, width, height, map);
         instance.map = map;
         instance.debut();
-//        instance.initAutoMove();
         return instance;
     }
 
@@ -120,20 +119,6 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
         return new Position(x, y);
     }
 
-    /**
-     * 初始化并且自动移动
-     */
-    private void initAutoMove() {
-        ThreadPoolManager.SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                if (isDebut) {
-                    move();
-                }
-            }
-        },0l,OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
-
-    }
 
     @Override
     public boolean checkMoveable(){
