@@ -76,16 +76,16 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
         final int tx = targetPosition.getX();
         final int ty = targetPosition.getY();
         if (tx > x) {
-            x = Math.min(x + (speed*((y/100)+1)), tx);
+            x = Math.min(x + (speed*((y/50)+1)), tx);
         } else if (tx < x) {
-            x = Math.max(x - speed*((y/100)+1), tx);
+            x = Math.max(x - speed*((y/50)+1), tx);
         }
 
-        y += speed*((y/100)+1);
+        y += speed*((y/50)+1);
         Position now = new Position(x, y);
         if (now.equals(targetPosition))
             this.refreshTargetPosition();
-        if (y == ty)
+        if (y >= ty)
             return false;
         return true;
     }

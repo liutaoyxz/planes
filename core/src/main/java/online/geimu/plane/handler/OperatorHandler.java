@@ -20,7 +20,7 @@ public class OperatorHandler {
     /**
      * 刷新敌方飞机间隔
      */
-    public static final int EP_INTERVAL = 500;
+    public static final int EP_INTERVAL = 330;
 
 
     private  OperatorHandler(){
