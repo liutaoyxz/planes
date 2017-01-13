@@ -40,7 +40,7 @@ public class Position {
         if (!(obj instanceof Position))
             return false;
         Position p2 = (Position)obj;
-        if (p2.getX() == x && p2.getY() == y)
+        if (p2.getX() == x )
             return true;
         return false;
     }

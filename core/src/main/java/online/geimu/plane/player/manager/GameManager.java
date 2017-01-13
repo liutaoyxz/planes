@@ -30,14 +30,13 @@ public class GameManager {
     private static final Logger log = Logger.getLogger(GameManager.class);
 
 
-
     /**
      * 子弹线程
      */
-    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(3);
+    private final ScheduledExecutorService bframe = Executors.newScheduledThreadPool(10);
 
     //本局飞机数组
-    private final List<Plane> plist = new ArrayList();
+    private final List<Plane> plist = new CopyOnWriteArrayList<>();
 
     /**
      * id 玩家映射,没有使用{@link ConcurrentHashMap},{@link ConcurrentHashMap}在存储数据较少的情况下性能感觉不比同步的Map高.
@@ -49,9 +48,9 @@ public class GameManager {
     /**
      * 子弹数组
      */
-    private final List<IndependentObj> eb = new ArrayList<>();
+    private final List<IndependentObj> eb = new CopyOnWriteArrayList<>();
 
-    private final List<IndependentObj> ep = new ArrayList<>();
+    private final List<IndependentObj> ep = new CopyOnWriteArrayList<>();
 
     private volatile String content;
 
@@ -73,40 +72,79 @@ public class GameManager {
         for (Plane p : plist) {
             p.move();
         }
-        bframe.scheduleAtFixedRate( new Runnable() {
-            @Override
-            public void run() {
-                Iterator<? extends IndependentObj> it = eb.iterator();
-                while (it.hasNext()){
-                    IndependentObj next = it.next();
-                    boolean b = next.move();
-                    if (!b){
-                        it.remove();
-                    }
-                }
-            }
-        }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
-
-        bframe.scheduleAtFixedRate( new Runnable() {
-            @Override
-            public void run() {
-                Iterator<? extends IndependentObj> it = ep.iterator();
-                while (it.hasNext()){
-                    IndependentObj next = it.next();
-                    if (next.checkMoveable()){
-                        next.move();
-                    }
-                }
-            }
-        }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
-
+        /**
+         * 刷新子弹
+         */
         bframe.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                castMsg(Operator.FRAME_INFO.code());
+                try {
+                    for (IndependentObj obj : eb){
+                        boolean b = obj.move();
+                        if (!b){
+                            eb.remove(obj);
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
         }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
-        ep.add(TestEnemyPlane.newInstance(1,100,100,plist.get(0).getMap()));
+
+        /**
+         * 敌机移动
+         */
+        bframe.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Iterator<? extends IndependentObj> it = ep.iterator();
+                    for (IndependentObj obj : ep){
+                        if (obj.checkMoveable()){
+                            boolean b = obj.move();
+                            if (!b){
+                                ep.remove(obj);
+                            }
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
+
+        Thread cast = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    castMsg(Operator.FRAME_INFO.code());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        /**
+         * 广播画面
+         */
+        bframe.scheduleAtFixedRate(cast, 0l, OperatorHandler.INTERVAL, TimeUnit.MILLISECONDS);
+
+        /**
+         * 刷新敌机
+         */
+        bframe.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ep.add(TestEnemyPlane.newInstance(1, 56, 36, plist.get(0).getMap()));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, 2000l, OperatorHandler.EP_INTERVAL, TimeUnit.MILLISECONDS);
+
 
     }
 
@@ -130,9 +168,11 @@ public class GameManager {
         WCResponse response = new WCResponse();
         head.setType(type);
         ResBody body = new ResBody();
-        body.setEb(eb);
+        List<IndependentObj> snapshotEB = new ArrayList<>(eb);
+        List<IndependentObj> snapshotEP = new ArrayList<>(ep);
+        body.setEb(snapshotEB);
         body.setPlanes(plist);
-        body.setEp(ep);
+        body.setEp(snapshotEP);
         response.setHead(head);
         response.setBody(body);
         for (Plane p : plist) {
@@ -187,15 +227,16 @@ public class GameManager {
 
     /**
      * 开枪
+     *
      * @param id
      */
-    public void shoot(String id){
+    public void shoot(String id) {
         Plane plane = idps.get(id);
         final int px = plane.getPx();
         final int py = plane.getPy();
         final int width = plane.getWidth();
         final int speed = plane.getSpeed();
-        IndependentObj o = new TestBullet(px+width/2,py,2*speed);
+        IndependentObj o = new TestBullet(px + width / 2, py, 2 * speed);
         eb.add(o);
     }
 

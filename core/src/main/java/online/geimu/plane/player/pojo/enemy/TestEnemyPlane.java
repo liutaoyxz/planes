@@ -39,14 +39,24 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
     private TestMap map;
 
     private TestEnemyPlane(int speed, int width, int height, TestMap map) {
+        Random r = new Random();
         this.map = map;
         this.width = width;
         this.height = height;
-        x = map.getX() / 2 - width / 2;
+        x = Math.max(0, r.nextInt(map.getX() - width));
         y = -height;
         this.speed = speed;
     }
 
+    /**
+     * 静态工厂生产敌机
+     *
+     * @param speed
+     * @param width
+     * @param height
+     * @param map
+     * @return
+     */
     public static TestEnemyPlane newInstance(int speed, int width, int height, TestMap map) {
         TestEnemyPlane instance = new TestEnemyPlane(speed, width, height, map);
         instance.map = map;
@@ -66,20 +76,18 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
         final int tx = targetPosition.getX();
         final int ty = targetPosition.getY();
         if (tx > x) {
-            x = Math.min(x + speed, tx);
+            x = Math.min(x + (speed*((y/100)+1)), tx);
         } else if (tx < x) {
-            x = Math.max(x - speed, tx);
+            x = Math.max(x - speed*((y/100)+1), tx);
         }
 
-        if (ty > y) {
-            y = Math.min(y + speed, ty);
-        } else if (ty < y) {
-            y = Math.max(y - speed, ty);
-        }
+        y += speed*((y/100)+1);
         Position now = new Position(x, y);
         if (now.equals(targetPosition))
             this.refreshTargetPosition();
-        return false;
+        if (y == ty)
+            return false;
+        return true;
     }
 
     @Override
@@ -105,10 +113,9 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
      */
     private void refreshTargetPosition() {
         final int maxX = map.getX();
-        final int maxY = map.getY() / 2;
         Random random = new Random();
         int rx = Math.max(random.nextInt(maxX) + 1 - width, 0);
-        int ry = random.nextInt(maxY) + 1;
+        int ry = map.getY();
         this.targetPosition = new Position(rx, ry);
     }
 
@@ -120,7 +127,7 @@ public class TestEnemyPlane extends AbstractEnemyPlane {
 
 
     @Override
-    public boolean checkMoveable(){
+    public boolean checkMoveable() {
         return isDebut;
     }
 

@@ -17,6 +17,11 @@ public class OperatorHandler {
      */
     public static final int INTERVAL = 30;
 
+    /**
+     * 刷新敌方飞机间隔
+     */
+    public static final int EP_INTERVAL = 500;
+
 
     private  OperatorHandler(){
 
